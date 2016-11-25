@@ -2,18 +2,19 @@ import React from 'react';
 import {IndexRoute, Route} from 'react-router';
 
 import NotFound from './containers/NotFound/NotFound';
-import Hello from './containers/Hello/Hello';
+import App from './containers/App/App';
+import Index from './containers/Index/Index';
+
 export default () => {
   /**
-   * Please keep routes in alphabetical order
+   * Please keep
+   routes in alphabetical order
    */
   return (
-    <Route path="/" component={Hello}>
-      { /* Home (main) route */ }
-      {/* <IndexRoute component={Index}/> */}
-      {/* <Route path="/list" component={List} /> */}
-      { /* Catch all route */ }
+    <Route path="/" component={App}>
+      <IndexRoute component={Index}/>
+      <Route path="/index" component={Index} />
       <Route path="*" component={NotFound} status={404} />
     </Route>
   );
-};
+}
