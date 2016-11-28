@@ -13,18 +13,25 @@ import useScroll from 'scroll-behavior/lib/useStandardScroll';
 
 import getRoutes from './routes';
 import {fromJS} from 'immutable';
+
+import {Public} from './components/index.js';
+
 // const client = new ApiClient();
 const history = useScroll(() => browserHistory)();
 const dest = document.getElementById('content');
 const store = createStore(history, fromJS(window.__data));
 
-const component = (
-  <Router routes={getRoutes()} history={history} />
-);
+const Router_ = <Router routes={getRoutes()} history={history} />;
 
 ReactDOM.render(
   <Provider store={store} key="provider">
-    {component}
+    {Router_}
   </Provider>,
   dest
 );
+// ReactDOM.render(
+//   <Provider store={store} key="provider111">
+//     <Public />
+//   </Provider>,
+//   document.getElementById('Public')
+// );
