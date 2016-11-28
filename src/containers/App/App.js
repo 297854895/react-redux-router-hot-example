@@ -16,7 +16,7 @@ export default class App extends Component {
       <div className="container">
         <h1>Hello</h1>
         <p>This is a example for React</p>
-        <a href="/index">index</a>
+        <a href="/component">component</a>
         <div></div>
         <a href="/">Hello</a>
         {React.cloneElement(this.props.children, this.props)}
