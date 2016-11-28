@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import styles from './Index.less';
 
 export default class Index extends Component {
   constructor(props) {

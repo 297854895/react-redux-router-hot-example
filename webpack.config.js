@@ -5,7 +5,7 @@ var publicPath = 'http://localhost:3000/';
 var hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';
 
 var devConfig = {
-    entry:  [__dirname + "/src/client.js",hotMiddlewareScript ],
+    entry:  [__dirname + "/src/client.js", hotMiddlewareScript ],
     output: {
      path: __dirname + "/dist",
      filename: "bundle.js",
@@ -15,6 +15,10 @@ var devConfig = {
     module: {
       loaders: [
         {
+          test: /\.less$/,
+          loader: "style-loader!css-loader!less-loader?strictMath&noIeCompat"
+        },
+        {
           test: /\.json$/,
           loader: "json"
         },
@@ -22,6 +26,14 @@ var devConfig = {
           test: /\.js$/,
           exclude: /node_modules/,
           loader: 'babel',
+        },
+        {
+          test: /\.png$/,
+          loader: "url-loader?limit=10240"
+        },
+        {
+          test: /\.jpg$/,
+          loader: "url-loader?limit=10240"
         }
       ]
     },
