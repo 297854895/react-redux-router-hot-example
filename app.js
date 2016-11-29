@@ -36,9 +36,6 @@ app.use(webpackDevMiddleware(compiler, {
 }));
 app.use(webpackHotMiddleware(compiler));
 
-// app.get('/*', function(req, res, next) {
-//   res.render('index.ejs');
-// });
 app.use((req, res) => {
   res.render('index.ejs');
 });

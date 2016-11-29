@@ -7,10 +7,6 @@ import Index from './containers/Index/Index';
 import {Component_} from  './components/index.js';
 
 export default () => {
-  /**
-   * Please keep
-   routes in alphabetical order
-   */
   return (
     <Route path="/" component={App}>
       <IndexRoute component={Index}/>
