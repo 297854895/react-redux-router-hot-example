@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as clientAC from '../../redux/actions/client';
 import styles from './App.less';
 import {Public} from '../../components';
+import {Link} from 'react-router';
 @connect(
   state => ({clientState: state.client}),
   dispatch => ({clientBoundAC: bindActionCreators(clientAC, dispatch)})
@@ -21,9 +22,9 @@ export default class App extends Component {
         <Public />
         <h1>App</h1>
         <p>This is a example for React</p>
-        <a href="/component">component</a>
+        <Link to="/component">component</Link>
         <div></div>
-        <a href="/">Index</a>
+        <Link to="/">Index</Link>
         {React.cloneElement(this.props.children, this.props)}
       </div>
     );

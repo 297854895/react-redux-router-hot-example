@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "1b3f837fab795b91fbb3"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "38d818867f11408744c2"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -26481,14 +26481,14 @@
 	          'This is a example for React'
 	        ),
 	        _react2.default.createElement(
-	          'a',
-	          { href: '/component' },
+	          Link,
+	          { to: '/component' },
 	          'component'
 	        ),
 	        _react2.default.createElement('div', null),
 	        _react2.default.createElement(
-	          'a',
-	          { href: '/' },
+	          Link,
+	          { to: '/' },
 	          'Index'
 	        ),
 	        _react2.default.cloneElement(this.props.children, this.props)
