@@ -25,10 +25,14 @@ const Router_ = <Router routes={getRoutes()} history={history} />;
 
 ReactDOM.render(
   <Provider store={store} key="provider">
-    {Router_}
+    <div>
+      <Public />
+      {Router_}
+    </div>
   </Provider>,
   dest
 );
+
 // ReactDOM.render(
 //   <Provider store={store} key="provider111">
 //     <Public />

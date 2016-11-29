@@ -7,7 +7,7 @@ export default class Index extends Component {
   }
   render() {
     return (
-      <div className="index">
+      <div className={styles.index}>
         <h1>Index</h1>
         <p>This is Index</p>
       </div>
