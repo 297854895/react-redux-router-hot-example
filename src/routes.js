@@ -11,6 +11,7 @@ export default () => {
     <Route path="/" component={App}>
       <IndexRoute component={Index}/>
       <Route path="/component" component={Component_} />
+      <Route path="/not" component={NotFound} />
       <Route path="*" component={NotFound} status={404} />
     </Route>
   );

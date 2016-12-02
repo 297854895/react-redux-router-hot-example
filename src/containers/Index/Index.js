@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import styles from './Index.less';
-
 export default class Index extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
+    this.context.router
   }
   render() {
     return (
@@ -13,4 +13,7 @@ export default class Index extends Component {
       </div>
     );
   }
+}
+Index.contextTypes = {
+  router: Object
 }
