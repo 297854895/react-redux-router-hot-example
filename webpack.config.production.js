@@ -30,6 +30,12 @@ module.exports = {
                 "plugins": ['transform-async-to-generator', 'transform-decorators-legacy']
             }
         }, {
+          test: /\.css$/,
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: ['css-loader']
+          })
+        }, {
           test: /\.less$/,
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
