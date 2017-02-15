@@ -10,11 +10,23 @@ export default function createStore(history, data) {
 
   // const middleware = [createMiddleware(client), reduxRouterMiddleware];
 
-  let finalCreateStore;
-  finalCreateStore = applyMiddleware(thunk)(_createStore);
 
+  let finalCreateStore;
+  // if (process.env.NODE_ENV !== 'production') {
+  //   const { persistState } = require('redux-devtools');
+  //   const DevTools = require('../containers/DevTools/DevTools');
+  //   finalCreateStore = compose(
+  //     // applyMiddleware(...middleware),
+  //     applyMiddleware(thunk),
+  //     persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+  //   )(_createStore);
+  // } else {
+    // finalCreateStore = applyMiddleware(...middleware)(_createStore);
+    finalCreateStore = applyMiddleware(thunk)(_createStore);
+  // }
   const reducer = require('./reducers/');
-  const store = finalCreateStore(reducer, data);
+
+  const store = finalCreateStore(reducer.default, data);
 
   // reduxRouterMiddleware.listenForReplays(store);
 

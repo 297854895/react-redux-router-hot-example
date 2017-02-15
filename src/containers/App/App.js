@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as clientAC from '../../redux/actions/client';
 import styles from './App.less';
-import {Public} from '../../components';
+import Public from '../../components/Public/Public';
 import {Link} from 'react-router';
 @connect(
   state => ({clientState: state.client}),
@@ -21,8 +21,8 @@ export default class App extends Component {
       <div className={styles.container}>
         <Public />
         <h1>App</h1>
-        <p>This is a example for React</p>
-        <Link to="/component">component</Link>
+        <p>react-redux-router-hot-example</p>
+        <Link to="/num">Num</Link>
         <div></div>
         <Link to="/">Index</Link>
         {React.cloneElement(this.props.children, this.props)}

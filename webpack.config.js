@@ -1,46 +1,76 @@
-var webpack = require('webpack');
-var path = require('path');
+var path = require("path");
+var webpack = require("webpack");
+var precss = require("precss");
+var autoprefixer = require("autoprefixer");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
 
-var publicPath = 'http://localhost:3000/';
-var hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';
-
-var devConfig = {
-    entry:  [__dirname + "/src/client.js", hotMiddlewareScript ],
+module.exports = {
+    entry: [
+        "react-hot-loader/patch",
+        "babel-polyfill",
+        "whatwg-fetch",
+        "webpack-dev-server/client?http://localhost:7777",
+        "webpack/hot/only-dev-server",
+        "./src/index"
+    ],
     output: {
-     path: __dirname + "/dist",
-     filename: "bundle.js",
-     publicPath: publicPath
+        path: path.join(__dirname, "dist"),
+        publicPath: "/",
+        filename: "app.[hash].js"
     },
-    devtool: 'source-map',
+    devtool: "eval",
     module: {
-      loaders: [
-        {
-          test: /\.less$/,
-          loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[path]___[name]__[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap' 
-        },
-        {
-          test: /\.json$/,
-          loader: "json"
-        },
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          loader: 'babel',
-        },
-        {
-          test: /\.png$/,
-          loader: "url-loader?limit=10240"
-        },
-        {
-          test: /\.jpg$/,
-          loader: "url-loader?limit=10240"
-        }
-      ]
+        loaders: [
+            {
+                test: /\.js$/,
+                include: path.join(__dirname, "src"),
+                loader: "babel-loader",
+                query: {
+                    presets: [
+                        [ "es2015", { modules: false } ],
+                        "stage-2",
+                        "react"
+                    ],
+                    plugins: [
+                        "react-hot-loader/babel",
+                        "transform-async-to-generator",
+                        "transform-decorators-legacy"
+                    ]
+                }
+            },
+            {
+              test: /\.less$/,
+              use: [
+                'style-loader',
+                { loader: 'css-loader', options: { importLoaders: 2 , modules: true, localIdentName: '[path]___[name]__[local]___[hash:base64:5]'} },
+                { loader: 'autoprefixer-loader', options: { browsers: 'last 2 version'} },
+                'less-loader'
+              ]
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                loaders: [
+                    "file-loader?hash=sha512&digest=hex&name=assets/[hash].[ext]",
+                    "image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false"
+                ]
+            }
+        ]
     },
     plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
+        new HtmlWebpackPlugin({ hash: false, template: "./index.hbs" }),
+        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /nb/),
+        new webpack.LoaderOptionsPlugin({
+            test: /\.scss$/,
+            debug: true,
+            options: {
+                postcss: function() {
+                    return [ precss, autoprefixer ];
+                },
+                context: path.join(__dirname, "src"),
+                output: { path: path.join(__dirname, "dist") }
+            }
+        })
     ]
 };
-module.exports = devConfig;
