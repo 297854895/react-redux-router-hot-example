@@ -4,6 +4,7 @@ var precss = require('precss');
 var autoprefixer = require('autoprefixer');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var TransferWebpackPlugin = require('transfer-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -14,7 +15,7 @@ module.exports = {
         ],
     },
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, './prod/dist'),
         publicPath: '/',
         filename: 'assets/[name].[hash].js',
         chunkFilename: 'assets/[name].[chunkhash].js'
@@ -55,25 +56,12 @@ module.exports = {
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify('production')
-            }
+          'process.env': {
+              'NODE_ENV': JSON.stringify('production')
+          }
         }),
         new webpack.NamedModulesPlugin(),
         new webpack.optimize.OccurrenceOrderPlugin(true),
-        new webpack.LoaderOptionsPlugin({
-            test: /\.scss$/,
-            debug: true,
-            options:  {
-                postcss: function() {
-                    return [precss, autoprefixer];
-                },
-                context: path.join(__dirname, 'src'),
-                output: {
-                    path: path.join(__dirname, 'dist')
-                }
-            }
-        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             minChunks: Infinity
@@ -83,10 +71,14 @@ module.exports = {
                 warnings: false
             }
         }),
+        new TransferWebpackPlugin([
+          {from: 'static', to: 'static'}
+        ]),
         new ExtractTextPlugin("assets/styles.css"),
         new HtmlWebpackPlugin({
             hash: false,
-            template: './index.hbs'
+            template: './index.hbs',
+            filename: 'index.ejs'
         })
     ],
 };

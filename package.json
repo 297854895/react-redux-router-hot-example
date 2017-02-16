@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "node server.js",
+    "prod": "pm2 delete www & pm2 start ./prod/bin/www",
+    "stop_prod": "pm2 delete www",
     "build": "rimraf ./dist && webpack --config webpack.config.production.js",
     "preview": "http-server ./dist -p 1234 -c-1",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,6 +21,7 @@
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-polyfill": "^6.23.0",
     "css-loader": "^0.25.0",
+    "ejs": "^2.5.5",
     "file-loader": "^0.10.0",
     "highlight.js": "^9.8.0",
     "html-webpack-plugin": "^2.28.0",
@@ -41,6 +44,7 @@
     "resolve-url-loader": "^1.6.1",
     "scroll-behavior": "^0.3.2",
     "style-loader": "^0.13.1",
+    "transfer-webpack-plugin": "^0.1.4",
     "webpack": "^2.2.1",
     "whatwg-fetch": "^2.0.2"
   },
@@ -54,7 +58,13 @@
     "react-hot-loader": "^3.0.0-beta.2",
     "webpack-dev-server": "^2.3.0",
     "extract-text-webpack-plugin": "^2.0.0-beta.4",
-    "rimraf": "^2.5.4"
+    "rimraf": "^2.5.4",
+    "body-parser": "~1.15.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "express": "~4.13.4",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.0"
   },
   "repository": {
     "type": "git",
